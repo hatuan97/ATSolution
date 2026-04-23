@@ -327,7 +327,7 @@ export default function App() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-                  href="#contact"
+                  href="#contact-us"
                   className="rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-lg transition hover:-translate-y-0.5"
                 >
                   {t("Book a Free Consultation", "Đặt lịch tư vấn miễn phí")}
@@ -540,7 +540,7 @@ export default function App() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+      <section id="solutions" className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
             {t("Recent Projects", "Dự án gần đây")}
@@ -618,7 +618,7 @@ export default function App() {
         </div>
       </section>
 
-      <section className="bg-slate-50">
+      <section id="contact-us" className="bg-slate-50">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold sm:text-4xl text-slate-900">{t("Contact Us", "Liên hệ với chúng tôi")}</h2>
