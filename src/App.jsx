@@ -1,720 +1,599 @@
 import { useMemo, useState } from "react";
+import {
+  ArrowRight,
+  Bot,
+  Calendar,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  Clock3,
+  Gem,
+  Globe,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+  Scissors,
+  ShoppingBag,
+  Sparkles,
+  Target,
+  Truck,
+  Store,
+  Briefcase,
+} from "lucide-react";
+import sitecraftLogo from "./assets/sitecraft-logo.png";
 
 export default function App() {
   const [lang, setLang] = useState("en");
   const t = (en, vi) => (lang === "en" ? en : vi);
 
-  const primaryServices = [
-    {
-      icon: "🛍️",
-      title: { en: "Retail & Product Websites", vi: "Website bán hàng & giới thiệu sản phẩm" },
-      subtitle: { en: "Sell, showcase, and receive inquiries", vi: "Bán hàng, giới thiệu sản phẩm và nhận yêu cầu" },
-      desc: {
-        en: "Perfect for stores, boutiques, and businesses that want to showcase products, receive inquiries, support online ordering, and present their brand professionally.",
-        vi: "Phù hợp cho cửa hàng, boutique và doanh nghiệp muốn giới thiệu sản phẩm, nhận yêu cầu, hỗ trợ đặt hàng online và xây dựng hình ảnh chuyên nghiệp."
-      }
-    },
-    {
-      icon: "📦",
-      title: { en: "Inventory & Business Management", vi: "Quản lý tồn kho & vận hành" },
-      subtitle: { en: "Organize stock, workflow, and operations", vi: "Sắp xếp tồn kho, quy trình và vận hành" },
-      desc: {
-        en: "Built for businesses that need better control over stock, services, internal workflows, and day-to-day operations.",
-        vi: "Dành cho doanh nghiệp cần kiểm soát tốt hơn về tồn kho, dịch vụ, quy trình nội bộ và vận hành hằng ngày."
-      }
-    },
-    {
-      icon: "💅",
-      title: { en: "Beauty, Nails & Hair Salons", vi: "Tiệm nails, tóc & làm đẹp" },
-      subtitle: { en: "Booking, services, promotions, payments", vi: "Đặt lịch, dịch vụ, khuyến mãi và thanh toán" },
-      desc: {
-        en: "Ideal for nail salons, hair salons, spas, and beauty businesses that want booking, service pages, payments, promotions, and easier customer communication.",
-        vi: "Phù hợp cho tiệm nails, tiệm tóc, spa và các business làm đẹp muốn có đặt lịch, trang dịch vụ, thanh toán, khuyến mãi và giao tiếp với khách hàng dễ hơn."
-      }
-    },
-    {
-      icon: "🤖",
-      title: { en: "AI Chatbot & Smart Booking", vi: "AI Chatbot & đặt lịch thông minh" },
-      subtitle: { en: "Automate replies, booking, and staff assignment", vi: "Tự động trả lời, đặt lịch và phân công nhân viên" },
-      desc: {
-        en: "Integrate AI chatbots that answer common questions, collect booking requests, recommend available time slots, and assign customers to staff members who are available that day.",
-        vi: "Tích hợp AI chatbot để trả lời câu hỏi thường gặp, nhận yêu cầu đặt lịch, gợi ý khung giờ còn trống và phân khách cho nhân viên còn available trong ngày."
-      }
-    }
-  ];
+  const brand = {
+    name: "SiteCraft Studio",
+    logo: sitecraftLogo,
+  };
 
-  const allSolutions = [
-    { en: "Retail and sales websites", vi: "Website bán hàng và kinh doanh" },
-    { en: "Inventory-friendly business systems", vi: "Hệ thống hỗ trợ quản lý tồn kho" },
-    { en: "Logistics and operations pages", vi: "Website logistics và vận hành" },
-    { en: "Nail salon booking websites", vi: "Website đặt lịch cho tiệm nails" },
-    { en: "Hair salon and beauty service websites", vi: "Website cho tiệm tóc và dịch vụ làm đẹp" },
-    { en: "Service business landing pages", vi: "Landing page cho doanh nghiệp dịch vụ" },
-    { en: "Payment and inquiry workflows", vi: "Quy trình thanh toán và tiếp nhận khách hàng" },
-    { en: "English + Vietnamese bilingual websites", vi: "Website song ngữ Anh - Việt" },
-    { en: "AI chatbot for booking and customer support", vi: "AI chatbot cho đặt lịch và chăm sóc khách hàng" }
-  ];
+  const heroMockup =
+  "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=1600&auto=format&fit=crop";
 
-  const trustPoints = [
-    {
-      title: { en: "Built Around Your Business", vi: "Thiết kế theo đúng mô hình kinh doanh" },
-      desc: {
-        en: "We do not force your business into a generic template. We design the structure around your services, products, and workflow.",
-        vi: "Chúng tôi không ép doanh nghiệp của bạn vào một mẫu có sẵn. Cấu trúc website được xây dựng theo dịch vụ, sản phẩm và quy trình của bạn."
-      }
-    },
-    {
-      title: { en: "Clear Bilingual Experience", vi: "Trải nghiệm song ngữ rõ ràng" },
-      desc: {
-        en: "Support both English and Vietnamese so your business can communicate professionally with a wider audience.",
-        vi: "Hỗ trợ cả tiếng Anh và tiếng Việt để doanh nghiệp của bạn giao tiếp chuyên nghiệp với nhiều nhóm khách hàng hơn."
-      }
-    },
-    {
-      title: { en: "Made to Generate Leads", vi: "Thiết kế để tạo khách hàng tiềm năng" },
-      desc: {
-        en: "Every section is designed to help visitors understand your offer quickly and take action faster.",
-        vi: "Mỗi phần trên website đều được viết để khách hiểu nhanh dịch vụ của bạn và hành động sớm hơn."
-      }
-    },
-    {
-      title: { en: "Easy to Manage Later", vi: "Dễ quản lý về sau" },
-      desc: {
-        en: "Your website should not become extra stress. We focus on a clean structure that is simple to update and scale.",
-        vi: "Website không nên trở thành gánh nặng. Chúng tôi ưu tiên cấu trúc gọn gàng, dễ cập nhật và dễ mở rộng."
-      }
-    },
-    {
-      title: { en: "AI Can Reduce Manual Messaging", vi: "AI giúp giảm trực tin nhắn thủ công" },
-      desc: {
-        en: "AI chatbot can handle common customer questions, booking intake, and availability checks so your team spends less time manually replying to repetitive messages.",
-        vi: "AI chatbot có thể xử lý các câu hỏi thường gặp, tiếp nhận đặt lịch và kiểm tra chỗ trống để đội ngũ của bạn bớt phải ngồi trả lời tin nhắn lặp đi lặp lại."
-      }
-    },
-    {
-      title: { en: "Smart Staff Assignment", vi: "Phân công nhân viên thông minh" },
-      desc: {
-        en: "For salons and service businesses, the system can route appointments to staff members who are available that day.",
-        vi: "Đối với salon và doanh nghiệp dịch vụ, hệ thống có thể phân lịch cho nhân viên còn available trong ngày."
-      }
-    }
+  const industries = [
+    { icon: Scissors, en: "Hair Salons", vi: "Tiệm tóc" },
+    { icon: Sparkles, en: "Nail Salons", vi: "Tiệm nails" },
+    { icon: Gem, en: "Spas", vi: "Spa" },
+    { icon: Store, en: "Retail Stores", vi: "Cửa hàng" },
+    { icon: Truck, en: "Logistics", vi: "Logistics" },
+    { icon: Briefcase, en: "Service Businesses", vi: "Business dịch vụ" },
   ];
-
-  const localBusinessExamples = [
-    {
-      name: { en: "Nail Salon", vi: "Tiệm Nails" },
-      details: {
-        en: "Service menu, booking request, gallery, specials, business hours, contact, bilingual support",
-        vi: "Menu dịch vụ, yêu cầu đặt lịch, gallery, khuyến mãi, giờ mở cửa, liên hệ và song ngữ"
-      }
-    },
-    {
-      name: { en: "Hair Salon", vi: "Tiệm Tóc" },
-      details: {
-        en: "Stylist showcase, appointment flow, pricing, treatment highlights, promotions, reviews",
-        vi: "Giới thiệu stylist, luồng đặt lịch, bảng giá, dịch vụ nổi bật, khuyến mãi và đánh giá"
-      }
-    },
-    {
-      name: { en: "Retail Shop", vi: "Cửa Hàng" },
-      details: {
-        en: "Product showcase, featured collections, order inquiry, promotional banners, business information",
-        vi: "Giới thiệu sản phẩm, bộ sưu tập nổi bật, yêu cầu đặt hàng, banner khuyến mãi và thông tin doanh nghiệp"
-      }
-    },
-    {
-      name: { en: "Logistics / Operations", vi: "Logistics / Vận Hành" },
-      details: {
-        en: "Service overview, quote request, process explanation, shipment or workflow communication",
-        vi: "Giới thiệu dịch vụ, yêu cầu báo giá, giải thích quy trình, cập nhật shipment hoặc workflow"
-      }
-    }
-  ];
-
-  const processSteps = [
-    {
-      num: "01",
-      title: { en: "Discovery", vi: "Khảo sát nhu cầu" },
-      desc: {
-        en: "We learn about your business, your customers, and the type of system or website you need.",
-        vi: "Chúng tôi tìm hiểu mô hình kinh doanh, khách hàng và loại website hoặc hệ thống bạn đang cần."
-      }
-    },
-    {
-      num: "02",
-      title: { en: "Strategy", vi: "Lên chiến lược" },
-      desc: {
-        en: "We plan the structure, content flow, bilingual sections, and features that fit your goals.",
-        vi: "Chúng tôi lên cấu trúc, flow nội dung, phần song ngữ và các tính năng phù hợp với mục tiêu của bạn."
-      }
-    },
-    {
-      num: "03",
-      title: { en: "Design & Build", vi: "Thiết kế & xây dựng" },
-      desc: {
-        en: "We create a clean, modern website that looks professional and supports how your business actually works.",
-        vi: "Chúng tôi tạo website hiện đại, gọn gàng, chuyên nghiệp và hỗ trợ đúng cách doanh nghiệp của bạn vận hành."
-      }
-    },
-    {
-      num: "04",
-      title: { en: "Launch & Growth", vi: "Ra mắt & phát triển" },
-      desc: {
-        en: "You launch with a stronger online presence and a system that is easier to manage as your business grows.",
-        vi: "Bạn ra mắt với hình ảnh online chuyên nghiệp hơn và một hệ thống dễ quản lý hơn khi business phát triển."
-      }
-    }
-  ];
-
-  const aiFeatures = useMemo(
-    () => [
-      {
-        title: t("Instant customer replies", "Trả lời khách hàng ngay lập tức"),
-        desc: t(
-          "Answer common questions automatically without requiring someone to sit and monitor messages all day.",
-          "Tự động trả lời các câu hỏi thường gặp mà không cần người ngồi trực tin nhắn cả ngày."
-        )
-      },
-      {
-        title: t("Booking intake automation", "Tự động tiếp nhận đặt lịch"),
-        desc: t(
-          "Collect service type, preferred time, customer info, and booking details through chat.",
-          "Thu thập loại dịch vụ, thời gian mong muốn, thông tin khách và chi tiết đặt lịch ngay trong khung chat."
-        )
-      },
-      {
-        title: t("Check who is available today", "Kiểm tra ai còn trống trong ngày"),
-        desc: t(
-          "Connect with your schedule to identify which staff members are available that day.",
-          "Kết nối với lịch làm việc để xác định nhân viên nào còn available trong ngày."
-        )
-      },
-      {
-        title: t("Smart assignment", "Phân công thông minh"),
-        desc: t(
-          "Recommend or assign the booking to the right team member based on availability and service type.",
-          "Gợi ý hoặc phân công lịch hẹn cho đúng nhân viên dựa trên thời gian trống và loại dịch vụ."
-        )
-      }
-    ],
-    [lang]
-  );
 
   const valuePoints = [
+    {
+      icon: Target,
+      title: {
+        en: "Sales-focused structure",
+        vi: "Cấu trúc thiên về bán hàng",
+      },
+      desc: {
+        en: "Every section is designed to help visitors understand your services quickly, trust your brand, and take action faster.",
+        vi: "Mỗi phần trên website đều được thiết kế để khách hiểu nhanh dịch vụ của bạn, tin tưởng thương hiệu và hành động nhanh hơn.",
+      },
+    },
+    {
+      icon: Gem,
+      title: {
+        en: "Professional brand presence",
+        vi: "Hình ảnh thương hiệu chuyên nghiệp",
+      },
+      desc: {
+        en: "A clean, modern presentation helps your business look more polished, credible, and established from the first impression.",
+        vi: "Cách trình bày hiện đại, gọn gàng giúp doanh nghiệp của bạn trông chỉn chu, đáng tin và chuyên nghiệp hơn ngay từ ấn tượng đầu tiên.",
+      },
+    },
+    {
+      icon: CheckCircle2,
+      title: {
+        en: "Practical for local businesses",
+        vi: "Thực tế cho business địa phương",
+      },
+      desc: {
+        en: "Especially useful for salons, retail shops, service businesses, and operations that need booking, inquiries, or payments.",
+        vi: "Đặc biệt phù hợp cho salon, cửa hàng, business dịch vụ và các mô hình cần đặt lịch, tiếp nhận khách hoặc thanh toán.",
+      },
+    },
+  ];
+const quickLinks = [
+  { en: "Home", vi: "Trang chủ" },
+  { en: "Services", vi: "Dịch vụ" },
+  { en: "Projects", vi: "Dự án" },
+  { en: "About", vi: "Giới thiệu" },
+  { en: "Blog", vi: "Blog" },
+  { en: "Contact", vi: "Liên hệ" },
+];
+
+const footerServices = [
+  { en: "Website Design", vi: "Thiết kế website" },
+  { en: "AI Chatbot", vi: "AI Chatbot" },
+  { en: "Booking Systems", vi: "Hệ thống đặt lịch" },
+  { en: "E-commerce", vi: "Thương mại điện tử" },
+  { en: "Website Maintenance", vi: "Bảo trì website" },
+  { en: "SEO Optimization", vi: "Tối ưu SEO" },
+];
+
+  const projects = [
   {
-    title: {
-      en: "Sales-focused structure",
-      vi: "Cấu trúc thiên về bán hàng",
-    },
+    title: { en: "Luxe Hair Salon", vi: "Luxe Hair Salon" },
+    category: { en: "Hair Salon", vi: "Tiệm tóc" },
     desc: {
-      en: "Every section is designed to help visitors understand your services quickly, trust your brand, and take action faster.",
-      vi: "Mỗi phần trên website đều được thiết kế để khách hiểu nhanh dịch vụ của bạn, tin tưởng thương hiệu và hành động nhanh hơn.",
+      en: "Modern website with online booking, service pages, and gallery showcase.",
+      vi: "Website hiện đại với đặt lịch online, trang dịch vụ và gallery.",
     },
+    tags: {
+      en: ["Booking", "Gallery", "Bilingual"],
+      vi: ["Đặt lịch", "Gallery", "Song ngữ"],
+    },
+    image:
+      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop",
   },
   {
-    title: {
-      en: "Professional brand presence",
-      vi: "Hình ảnh thương hiệu chuyên nghiệp",
-    },
+    title: { en: "Bliss Nails Studio", vi: "Bliss Nails Studio" },
+    category: { en: "Nail Salon", vi: "Tiệm nails" },
     desc: {
-      en: "A clean, modern presentation helps your business look more polished, credible, and established from the first impression.",
-      vi: "Cách trình bày hiện đại, gọn gàng giúp doanh nghiệp của bạn trông chỉn chu, đáng tin và chuyên nghiệp hơn ngay từ ấn tượng đầu tiên.",
+      en: "Stylish nail salon website with appointments and promotions.",
+      vi: "Website tiệm nails với đặt lịch và khuyến mãi.",
     },
+    tags: {
+      en: ["Appointments", "Promotions", "Payments"],
+      vi: ["Lịch hẹn", "Khuyến mãi", "Thanh toán"],
+    },
+    image:
+      "https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=1200&auto=format&fit=crop",
   },
   {
-    title: {
-      en: "Practical for local businesses",
-      vi: "Thực tế cho business địa phương",
-    },
+    title: { en: "FastMove Logistics", vi: "FastMove Logistics" },
+    category: { en: "Logistics", vi: "Logistics" },
     desc: {
-      en: "Especially useful for salons, retail shops, service businesses, and operations that need booking, inquiries, payments, or clearer customer communication.",
-      vi: "Đặc biệt phù hợp cho salon, cửa hàng, business dịch vụ và các mô hình cần đặt lịch, tiếp nhận khách, thanh toán hoặc giao tiếp với khách hàng rõ ràng hơn.",
+      en: "Business website for logistics services and operations.",
+      vi: "Website cho dịch vụ logistics và vận hành.",
     },
+    tags: {
+      en: ["Quote Request", "Services", "Operations"],
+      vi: ["Báo giá", "Dịch vụ", "Vận hành"],
+    },
+    image:
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
-  const recentProjects = [
-    {
-      title: { en: "Luxe Hair Salon", vi: "Luxe Hair Salon" },
-      category: { en: "Hair Salon", vi: "Tiệm tóc" },
-      description: {
-        en: "Luxury salon website with booking, service pages, and bilingual support.",
-        vi: "Website salon cao cấp với đặt lịch, trang dịch vụ và hỗ trợ song ngữ."
-      },
-      image:
-        "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1200&q=80",
-      tags: {
-        en: ["Booking", "Service Pages", "Bilingual"],
-        vi: ["Đặt lịch", "Trang dịch vụ", "Song ngữ"]
-      }
-    },
-    {
-      title: { en: "Bliss Nails Studio", vi: "Bliss Nails Studio" },
-      category: { en: "Nail Salon", vi: "Tiệm nails" },
-      description: {
-        en: "A modern nail salon site designed for appointments, promotions, and customer inquiries.",
-        vi: "Website tiệm nails hiện đại được thiết kế cho đặt lịch, khuyến mãi và tiếp nhận khách hàng."
-      },
-      image:
-        "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1200&q=80",
-      tags: {
-        en: ["Appointments", "Promotions", "Payments"],
-        vi: ["Lịch hẹn", "Khuyến mãi", "Thanh toán"]
-      }
-    },
-    {
-      title: { en: "FastMove Logistics", vi: "FastMove Logistics" },
-      category: { en: "Logistics", vi: "Logistics" },
-      description: {
-        en: "Business website for quote requests, service overview, and operations communication.",
-        vi: "Website doanh nghiệp cho báo giá, giới thiệu dịch vụ và truyền thông vận hành."
-      },
-      image:
-        "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1200&q=80",
-      tags: {
-        en: ["Quote Request", "Service Overview", "Operations"],
-        vi: ["Báo giá", "Dịch vụ", "Vận hành"]
-      }
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.22),transparent_22%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.16),transparent_28%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
-          <div className="mb-8 flex justify-end">
-            <div className="inline-flex rounded-full border border-white/15 bg-white/10 p-1 backdrop-blur">
+    <div className="min-h-screen bg-[#f7f8fc] text-slate-900">
+      <header className="border-b border-slate-200 bg-white/95 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+          <div className="flex items-center gap-4">
+            <img src={brand.logo} alt={brand.name} className="h-12 w-auto" />
+          </div>
+
+          <nav className="hidden items-center gap-7 text-sm font-medium text-slate-700 lg:flex">
+            <a href="#home" className="hover:text-blue-600">{t("Home", "Trang chủ")}</a>
+            <a href="#services" className="hover:text-blue-600">{t("Services", "Dịch vụ")}</a>
+            <a href="#projects" className="hover:text-blue-600">{t("Projects", "Dự án")}</a>
+            <a href="#about" className="hover:text-blue-600">{t("About", "Giới thiệu")}</a>
+            <a href="#contact" className="hover:text-blue-600">{t("Contact", "Liên hệ")}</a>
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <div className="hidden rounded-full border border-slate-200 bg-slate-50 p-1 sm:inline-flex">
               <button
                 type="button"
                 onClick={() => setLang("en")}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition ${lang === "en" ? "bg-white text-slate-900" : "text-white"}`}
+                className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${lang === "en" ? "bg-blue-600 text-white" : "text-slate-600"}`}
               >
-                English
+                EN
               </button>
               <button
                 type="button"
                 onClick={() => setLang("vi")}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition ${lang === "vi" ? "bg-white text-slate-900" : "text-white"}`}
+                className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${lang === "vi" ? "bg-blue-600 text-white" : "text-slate-600"}`}
               >
-                Tiếng Việt
+                VI
               </button>
             </div>
-          </div>
 
-          <div className="grid items-center gap-14 lg:grid-cols-2">
+            <a
+              href="#contact"
+              className="inline-flex items-center rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
+            >
+              {t("Start Your Project", "Bắt đầu dự án")}
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section id="home" className="relative overflow-hidden bg-[#f8f9fd]">
+          <div className="absolute right-0 top-0 h-[420px] w-[420px] rounded-full bg-blue-100/60 blur-3xl" />
+          <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:px-8 lg:py-20">
             <div>
-              <div className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm backdrop-blur">
-                {t("Custom Website Solutions • English + Vietnamese", "Giải pháp website theo yêu cầu • Tiếng Anh + Tiếng Việt")}
+              <div className="inline-flex rounded-full border border-blue-200 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-600 shadow-sm">
+                {t("Website Design & AI Solutions", "Thiết kế website & giải pháp AI")}
               </div>
-              <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-                {t(
-                  "Websites that help businesses get more customers, stay organized, and operate more smoothly.",
-                  "Website giúp doanh nghiệp có thêm khách hàng, quản lý gọn hơn và vận hành mượt hơn."
-                )}
+
+              <h1 className="mt-6 max-w-xl text-5xl font-bold leading-[1.05] tracking-tight text-slate-950 sm:text-6xl">
+                {t("Custom Websites That Help Local Businesses", "Website theo yêu cầu giúp business địa phương")}{" "}
+                <span className="text-blue-600">{t("Grow", "Phát triển")}</span>
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
+
+              <p className="mt-6 max-w-lg text-base leading-8 text-slate-600">
                 {t(
-                  "We build custom websites for retail, product-based businesses, inventory workflows, logistics, nail salons, hair salons, and service businesses that need booking, payment, promotion, and better day-to-day management.",
-                  "Chúng tôi xây dựng website theo yêu cầu cho retail, doanh nghiệp bán sản phẩm, quản lý tồn kho, logistics, tiệm nails, tiệm tóc và các business dịch vụ cần đặt lịch, thanh toán, quảng bá và quản lý hằng ngày tốt hơn."
+                  "We build modern, high-performing websites with AI chatbot integration to help you attract more customers, save time, and grow your business.",
+                  "Chúng tôi xây dựng website hiện đại, hiệu quả cao với tích hợp AI chatbot để giúp bạn thu hút thêm khách hàng, tiết kiệm thời gian và phát triển business."
                 )}
               </p>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">
-                {t(
-                  "We also support bilingual website experiences in English and Vietnamese for businesses serving both communities.",
-                  "Chúng tôi cũng hỗ trợ trải nghiệm website song ngữ tiếng Anh và tiếng Việt cho các doanh nghiệp phục vụ cả hai nhóm khách hàng."
-                )}
-              </p>
+
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-                  href="#contact-us"
-                  className="rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-lg transition hover:-translate-y-0.5"
+                  href="#contact"
+                  className="inline-flex items-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
                 >
-                  {t("Book a Free Consultation", "Đặt lịch tư vấn miễn phí")}
+                  {t("Start Your Project", "Bắt đầu dự án")}
                 </a>
                 <a
-                  href="#solutions"
-                  className="rounded-2xl border border-white/25 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                  href="#projects"
+                  className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-slate-300"
                 >
-                  {t("View Solutions", "Xem giải pháp")}
+                  {t("View Our Work", "Xem dự án")}
+                  <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
-              <div className="mt-8 flex flex-wrap gap-3 text-sm text-slate-300">
-                <span className="rounded-full border border-white/15 px-3 py-2">{t("Retail", "Bán hàng")}</span>
-                <span className="rounded-full border border-white/15 px-3 py-2">{t("Inventory", "Tồn kho")}</span>
-                <span className="rounded-full border border-white/15 px-3 py-2">{t("Logistics", "Logistics")}</span>
-                <span className="rounded-full border border-white/15 px-3 py-2">{t("Nails", "Nails")}</span>
-                <span className="rounded-full border border-white/15 px-3 py-2">{t("Hair Salon", "Tiệm tóc")}</span>
-                <span className="rounded-full border border-white/15 px-3 py-2">{t("Booking", "Đặt lịch")}</span>
-                <span className="rounded-full border border-white/15 px-3 py-2">{t("Payments", "Thanh toán")}</span>
-                <span className="rounded-full border border-white/15 px-3 py-2">AI Chatbot</span>
+
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-slate-600">
+                <div className="inline-flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-blue-600" />
+                  {t("Fast Delivery", "Triển khai nhanh")}
+                </div>
+                <div className="inline-flex items-center gap-2">
+                  <Bot className="h-4 w-4 text-blue-600" />
+                  {t("AI-Powered", "Có tích hợp AI")}
+                </div>
+                <div className="inline-flex items-center gap-2">
+                  <Globe className="h-4 w-4 text-blue-600" />
+                  {t("Bilingual Support", "Hỗ trợ song ngữ")}
+                </div>
               </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur">
-                <div className="text-3xl">🚀</div>
-                <h3 className="mt-4 text-xl font-semibold">{t("Sales-Driven", "Tập trung tạo khách hàng")}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-200">
-                  {t(
-                    "Built to help your visitors understand your services quickly and turn interest into inquiries.",
-                    "Được xây dựng để khách truy cập hiểu nhanh dịch vụ của bạn và biến sự quan tâm thành yêu cầu liên hệ."
-                  )}
-                </p>
-              </div>
-              <div className="rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur">
-                <div className="text-3xl">✨</div>
-                <h3 className="mt-4 text-xl font-semibold">{t("Premium Presence", "Hình ảnh cao cấp")}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-200">
-                  {t(
-                    "A cleaner, more elevated brand presentation for businesses that want to look more established.",
-                    "Cách thể hiện thương hiệu gọn gàng và cao cấp hơn cho doanh nghiệp muốn trông chuyên nghiệp và vững vàng hơn."
-                  )}
-                </p>
-              </div>
-              <div className="rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur">
-                <div className="text-3xl">📍</div>
-                <h3 className="mt-4 text-xl font-semibold">{t("Local Business Friendly", "Phù hợp business địa phương")}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-200">
-                  {t(
-                    "Especially helpful for salons, service shops, and local businesses that need visibility and easier booking.",
-                    "Đặc biệt phù hợp cho salon, cửa hàng dịch vụ và business địa phương cần tăng hiện diện online và đặt lịch dễ hơn."
-                  )}
-                </p>
-              </div>
-              <div className="rounded-3xl border border-white/10 bg-white/10 p-6 backdrop-blur">
-                <div className="text-3xl">🌐</div>
-                <h3 className="mt-4 text-xl font-semibold">{t("Bilingual Support", "Hỗ trợ song ngữ")}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-200">
-                  {t(
-                    "English and Vietnamese website experiences for better communication with your customers.",
-                    "Trải nghiệm website tiếng Anh và tiếng Việt giúp giao tiếp với khách hàng rõ ràng hơn."
-                  )}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-slate-50">
-  <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-    <div className="max-w-3xl">
-      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
-        {t("Why this works", "Vì sao giải pháp này hiệu quả")}
-      </p>
-      <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
-        {t(
-          "A stronger website for visibility, trust, and growth",
-          "Một website mạnh hơn để tăng hiện diện, độ tin cậy và tăng trưởng"
-        )}
-      </h2>
-      <p className="mt-4 text-lg leading-8 text-slate-600">
-        {t(
-          "Designed to help businesses attract attention, present their brand professionally, and make daily operations easier to manage.",
-          "Được thiết kế để giúp doanh nghiệp thu hút sự chú ý, thể hiện thương hiệu chuyên nghiệp và giúp việc vận hành hằng ngày dễ quản lý hơn."
-        )}
-      </p>
-    </div>
-
-    <div className="mt-12 grid gap-6 md:grid-cols-3">
-      {valuePoints.map((item) => (
-        <div
-          key={item.title.en}
-          className="rounded-[2rem] bg-white p-7 shadow-sm ring-1 ring-slate-200"
-        >
-          <h3 className="text-2xl font-semibold">{item.title[lang]}</h3>
-          <p className="mt-4 text-sm leading-7 text-slate-600">
-            {item.desc[lang]}
-          </p>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">{t("Core solutions", "Các giải pháp chính")}</p>
-          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">{t("Flexible website solutions for different industries", "Giải pháp website linh hoạt cho nhiều ngành nghề")}</h2>
-        </div>
-
-        <div className="mt-12 grid gap-6 lg:grid-cols-2 xl:grid-cols-4">
-          {primaryServices.map((service) => (
-            <div key={service.title.en} className="rounded-[2rem] border border-slate-200 p-7 shadow-sm">
-              <div className="text-4xl">{service.icon}</div>
-              <h3 className="mt-5 text-2xl font-semibold">{service.title[lang]}</h3>
-              <p className="mt-2 text-sm font-medium text-slate-500">{service.subtitle[lang]}</p>
-              <p className="mt-5 text-sm leading-7 text-slate-600">{service.desc[lang]}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 rounded-[2rem] bg-slate-50 p-8 ring-1 ring-slate-200">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">{t("We can build for", "Chúng tôi có thể xây cho")}</p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            {allSolutions.map((item) => (
-              <span key={item.en} className="rounded-full bg-white px-4 py-2 text-sm text-slate-700 ring-1 ring-slate-200">
-                {item[lang]}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">{t("Why clients choose this", "Vì sao khách hàng chọn giải pháp này")}</p>
-              <h2 className="mt-3 text-3xl font-bold sm:text-4xl">{t("Designed to be useful, scalable, and easy to run", "Thiết kế để hữu dụng, dễ mở rộng và dễ vận hành")}</h2>
-              <div className="mt-10 grid gap-5 sm:grid-cols-2">
-                {trustPoints.map((item) => (
-                  <div key={item.title.en} className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-                    <h3 className="text-lg font-semibold">{item.title[lang]}</h3>
-                    <p className="mt-3 text-sm leading-7 text-slate-600">{item.desc[lang]}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-200">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">{t("Bilingual support", "Hỗ trợ song ngữ")}</p>
-              <h3 className="mt-4 text-2xl font-bold">{t("English + Vietnamese", "Tiếng Anh + Tiếng Việt")}</h3>
-              <p className="mt-4 text-slate-600 leading-7">
-                {t(
-                  "If your audience includes both English-speaking and Vietnamese-speaking customers, your website should speak to both clearly. We can structure the experience so your business feels more accessible, more professional, and easier to trust.",
-                  "Nếu tệp khách hàng của bạn gồm cả người nói tiếng Anh và tiếng Việt, website nên giao tiếp rõ ràng với cả hai. Chúng tôi có thể xây dựng trải nghiệm giúp doanh nghiệp của bạn dễ tiếp cận hơn, chuyên nghiệp hơn và tạo cảm giác đáng tin hơn."
-                )}
-              </p>
-              <p className="mt-4 text-slate-500 leading-7">
-                {t(
-                  "A bilingual structure is especially valuable for local businesses serving mixed communities in the U.S.",
-                  "Cấu trúc song ngữ đặc biệt hữu ích cho các business địa phương tại Mỹ phục vụ cộng đồng đa ngôn ngữ."
-                )}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">AI Integration</p>
-          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
-            {t(
-              "AI chatbot integration for booking, scheduling, and lighter front-desk workload",
-              "Tích hợp AI chatbot cho đặt lịch, sắp lịch và giảm tải công việc trực tin nhắn"
-            )}
-          </h2>
-          <p className="mt-4 text-lg leading-8 text-slate-600">
-            {t(
-              "For businesses that receive many repetitive customer messages every day, AI can help automate the first layer of communication and booking coordination.",
-              "Đối với các business nhận nhiều tin nhắn lặp đi lặp lại mỗi ngày, AI có thể tự động xử lý lớp giao tiếp đầu tiên và hỗ trợ điều phối đặt lịch."
-            )}
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {aiFeatures.map((item) => (
-            <div key={item.title} className="rounded-3xl border border-slate-200 p-6 shadow-sm">
-              <h3 className="text-xl font-semibold">{item.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-slate-600">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 rounded-[2rem] bg-slate-50 p-8 ring-1 ring-slate-200">
-          <h3 className="text-2xl font-bold">
-            {t(
-              "A practical AI use case for salons and service businesses",
-              "Một ứng dụng AI thực tế cho salon và business dịch vụ"
-            )}
-          </h3>
-          <p className="mt-4 text-slate-600 leading-7">
-            {t(
-              "A customer can open the website chat, ask about available appointments, choose a service, and request a time. The chatbot can then check the schedule, identify which staff members are available that day, and suggest or route the booking accordingly — reducing the need for someone to constantly monitor and reply to messages manually.",
-              "Khách hàng có thể mở khung chat trên website, hỏi về lịch trống, chọn dịch vụ và yêu cầu thời gian mong muốn. Chatbot sau đó có thể kiểm tra lịch, xác định nhân viên nào còn trống trong ngày và gợi ý hoặc phân lịch phù hợp — giúp giảm nhu cầu phải có người liên tục ngồi trực và trả lời tin nhắn thủ công."
-            )}
-          </p>
-        </div>
-      </section>
-
-      <section id="solutions" className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
-            {t("Recent Projects", "Dự án gần đây")}
-          </p>
-          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
-            {t("Projects delivered for local businesses", "Các dự án đã triển khai cho business địa phương")}
-          </h2>
-          <p className="mt-4 text-lg leading-8 text-slate-600">
-            {t(
-              "A few examples of website solutions designed for service businesses, beauty brands, and local operations.",
-              "Một vài ví dụ về giải pháp website được thiết kế cho business dịch vụ, ngành làm đẹp và các doanh nghiệp địa phương."
-            )}
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-8 lg:grid-cols-3">
-          {recentProjects.map((project) => (
-            <div
-              key={project.title.en}
-              className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
-            >
-              <div className="aspect-[16/10] overflow-hidden bg-slate-100">
+            <div className="relative">
+              <div className="rounded-[2rem] bg-transparent p-0">
                 <img
-                  src={project.image}
-                  alt={project.title[lang]}
-                  className="h-full w-full object-cover transition duration-500 hover:scale-105"
+                  src={heroMockup}
+                  alt="SiteCraft Studio hero mockup"
+                  className="h-auto w-full rounded-[1.75rem] object-cover"
                 />
               </div>
-              <div className="p-6">
-                <div className="flex items-center justify-between gap-4">
-                  <h3 className="text-2xl font-semibold">{project.title[lang]}</h3>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
+
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                  <div className="flex items-start gap-3">
+                    <div className="rounded-xl bg-blue-50 p-3 text-blue-600">
+                      <Bot className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold text-slate-900">{t("AI Chatbot Integration", "Tích hợp AI Chatbot")}</h3>
+                      <p className="mt-1 text-xs leading-5 text-slate-500">
+                        {t(
+                          "Answer questions, book appointments, and capture leads 24/7.",
+                          "Trả lời câu hỏi, đặt lịch và thu thập khách hàng tiềm năng 24/7."
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                  <div className="flex items-start gap-3">
+                    <div className="rounded-xl bg-blue-50 p-3 text-blue-600">
+                      <Clock3 className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold text-slate-900">{t("Available 24/7", "Hoạt động 24/7")}</h3>
+                      <p className="mt-1 text-xs leading-5 text-slate-500">
+                        {t(
+                          "Never miss a customer message or booking opportunity.",
+                          "Không bỏ lỡ tin nhắn khách hàng hay cơ hội đặt lịch nào."
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-slate-200 bg-white">
+          <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
+            <p className="text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+              {t("Trusted by Local Businesses", "Được các business địa phương tin dùng")}
+            </p>
+            <div className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+              {industries.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.en} className="flex items-center justify-center gap-2 text-sm text-slate-600">
+                    <Icon className="h-4 w-4 text-slate-500" />
+                    <span>{lang === "en" ? item.en : item.vi}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section id="services" className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+              {t("Why This Works", "Vì sao giải pháp này hiệu quả")}
+            </p>
+            <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-950">
+              {t(
+                "A stronger website for visibility, trust, and growth",
+                "Một website mạnh hơn để tăng hiện diện, độ tin cậy và tăng trưởng"
+              )}
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-600">
+              {t(
+                "Designed to help businesses attract attention, present their brand professionally, and make daily operations easier to manage.",
+                "Được thiết kế để giúp doanh nghiệp thu hút sự chú ý, thể hiện thương hiệu chuyên nghiệp và giúp việc vận hành hằng ngày dễ quản lý hơn."
+              )}
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {valuePoints.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.title.en} className="rounded-[1.5rem] border border-slate-200 bg-white p-8 text-center shadow-sm">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                    <Icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="mt-6 text-xl font-semibold text-slate-900">{item.title[lang]}</h3>
+                  <p className="mt-4 text-sm leading-7 text-slate-600">{item.desc[lang]}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <section id="projects" className="mx-auto max-w-7xl px-6 py-8 pb-20 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+              {t("Recent Projects", "Dự án gần đây")}
+            </p>
+            <h2 className="mt-4 text-4xl font-bold tracking-tight text-slate-950">
+              {t("Projects delivered for local businesses", "Các dự án đã triển khai cho business địa phương")}
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-600">
+              {t(
+                "A few examples of website solutions designed for service businesses, beauty brands, and local operations.",
+                "Một vài ví dụ về giải pháp website được thiết kế cho business dịch vụ, ngành làm đẹp và các doanh nghiệp địa phương."
+              )}
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {projects.map((project) => (
+              <div key={project.title.en} className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-sm">
+                <div className="aspect-[1.15/0.8] overflow-hidden bg-slate-100">
+                  <img src={project.image} alt={project.title[lang]} className="h-full w-full object-cover" />
+                </div>
+                <div className="p-6">
+                  <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600">
                     {project.category[lang]}
                   </span>
-                </div>
-                <p className="mt-4 text-sm leading-7 text-slate-600">{project.description[lang]}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.tags[lang].map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-600"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  <h3 className="mt-4 text-2xl font-semibold text-slate-900">{project.title[lang]}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{project.desc[lang]}</p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.tags[lang].map((tag) => (
+                      <span key={tag} className="rounded-full bg-slate-50 px-3 py-1 text-xs font-medium text-slate-500 ring-1 ring-slate-200">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="mt-10 flex justify-center">
-          <a
-            href="#contact"
-            className="inline-flex items-center rounded-2xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
-          >
-            {t("Start Your Project", "Bắt đầu dự án của bạn")}
-          </a>
-        </div>
-      </section>
+          <div className="mt-10 flex justify-center">
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+            >
+              {t("Start Your Project", "Bắt đầu dự án")}
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">{t("Process", "Quy trình")}</p>
-          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">{t("Simple from consultation to launch", "Đơn giản từ tư vấn đến ra mắt")}</h2>
-        </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {processSteps.map((step) => (
-            <div key={step.num} className="rounded-3xl border border-slate-200 p-6 shadow-sm">
-              <div className="text-3xl font-bold text-blue-600">{step.num}</div>
-              <h3 className="mt-4 text-xl font-semibold">{step.title[lang]}</h3>
-              <p className="mt-3 text-sm leading-7 text-slate-600">{step.desc[lang]}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+        <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-8">
+          <div className="rounded-[2rem] bg-[#f2f6ff] p-8 md:p-10">
+            <div className="grid gap-8 lg:grid-cols-[1.2fr_0.25fr] lg:items-end">
+              <div className="flex gap-5">
+                <div className="pt-2 text-blue-600">
+                  <MessageSquare className="h-10 w-10 fill-current stroke-none" />
+                </div>
+                <div>
+                  <p className="max-w-2xl text-2xl font-semibold leading-10 text-slate-900">
+                    {t(
+                      "SiteCraft Studio built a beautiful website for our salon. The booking system and chatbot have saved us so much time and helped us get more customers every week.",
+                      "SiteCraft Studio đã xây cho salon của chúng tôi một website rất đẹp. Hệ thống đặt lịch và chatbot giúp tiết kiệm rất nhiều thời gian và mang lại thêm khách hàng mỗi tuần."
+                    )}
+                  </p>
 
-      <section id="contact-us" className="bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold sm:text-4xl text-slate-900">{t("Contact Us", "Liên hệ với chúng tôi")}</h2>
-            <p className="mt-4 text-lg text-slate-600">
-              {t("Get in touch with AT Solutions for your website needs", "Liên hệ với AT Solutions cho nhu cầu website của bạn")}
-            </p>
-            <div className="mt-12 grid gap-8 md:grid-cols-3">
-              <div className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
-                <div className="text-4xl mb-4">🏢</div>
-                <h3 className="text-xl font-semibold text-slate-900">AT Solutions</h3>
-                <p className="mt-2 text-slate-600">{t("Web Development Company", "Công ty Phát triển Website")}</p>
+                  <div className="mt-8 flex items-center gap-4">
+                    <img
+                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80"
+                      alt="Jessica Nguyen"
+                      className="h-12 w-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold text-slate-900">Jessica Nguyen</div>
+                      <div className="text-sm text-slate-500">{t("Owner, Luxe Hair Salon", "Owner, Luxe Hair Salon")}</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
-                <div className="text-4xl mb-4">📧</div>
-                <h3 className="text-xl font-semibold text-slate-900">{t("Email", "Email")}</h3>
-                <a href="mailto:contactus@atsolutions.com" className="mt-2 text-blue-600 hover:text-blue-800">
-                  contactus@atsolutions.com
-                </a>
-              </div>
-              <div className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
-                <div className="text-4xl mb-4">📞</div>
-                <h3 className="text-xl font-semibold text-slate-900">{t("Phone", "Điện thoại")}</h3>
-                <a href="tel:6418191720" className="mt-2 text-blue-600 hover:text-blue-800">
-                  (641) 819-1720
-                </a>
+
+              <div className="flex items-center justify-end gap-3">
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-blue-600" />
+                  <span className="h-2 w-2 rounded-full bg-blue-200" />
+                  <span className="h-2 w-2 rounded-full bg-blue-200" />
+                </div>
+                <button className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-600 shadow-sm ring-1 ring-slate-200">
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-600 shadow-sm ring-1 ring-slate-200">
+                  <ChevronRight className="h-4 w-4" />
+                </button>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="contact" className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <section id="contact" className="mx-auto max-w-7xl px-6 pb-20 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-100">{t("Get started", "Bắt đầu")}</p>
-              <h2 className="mt-3 text-3xl font-bold sm:text-5xl">
-                {t(
-                  "Let’s build a website that makes your business easier to promote and easier to manage.",
-                  "Hãy cùng xây một website giúp business của bạn dễ quảng bá và dễ quản lý hơn."
-                )}
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+                {t("Ready to Get Started?", "Sẵn sàng bắt đầu?")}
+              </p>
+              <h2 className="mt-4 max-w-lg text-5xl font-bold leading-tight tracking-tight text-slate-950">
+                {t("Let’s build a website that works for your business.", "Hãy cùng xây một website thật sự hiệu quả cho business của bạn.")}
               </h2>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-blue-50">
+              <p className="mt-5 max-w-md text-base leading-8 text-slate-600">
                 {t(
-                  "Whether you need a simple landing page, a service website, a booking flow, a product showcase, or a more organized system for your business, we can create the right solution based on your goals.",
-                  "Dù bạn cần landing page đơn giản, website dịch vụ, luồng đặt lịch, trang giới thiệu sản phẩm hay một hệ thống rõ ràng hơn cho doanh nghiệp, chúng tôi có thể xây dựng giải pháp phù hợp với mục tiêu của bạn."
+                  "Tell us about your business and we’ll create the right solution for you.",
+                  "Hãy cho chúng tôi biết về business của bạn và chúng tôi sẽ tạo giải pháp phù hợp."
                 )}
               </p>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-blue-100">
-                {t(
-                  "We can also advise on AI chatbot integration if you want to automate bookings and reduce repetitive customer messaging.",
-                  "Chúng tôi cũng có thể tư vấn tích hợp AI chatbot nếu bạn muốn tự động hóa booking và giảm các tin nhắn khách hàng lặp đi lặp lại."
-                )}
-              </p>
+
+              <div className="mt-10 space-y-5 text-slate-700">
+                <div className="flex items-center gap-3">
+                  <div className="rounded-full bg-blue-50 p-2.5 text-blue-600">
+                    <Phone className="h-4 w-4" />
+                  </div>
+                  <span>(641) 819-1720</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="rounded-full bg-blue-50 p-2.5 text-blue-600">
+                    <Mail className="h-4 w-4" />
+                  </div>
+                  <span>contactus@sitecraftstudio.com</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="rounded-full bg-blue-50 p-2.5 text-blue-600">
+                    <MapPin className="h-4 w-4" />
+                  </div>
+                  <span>Texas, USA</span>
+                </div>
+              </div>
             </div>
 
-            <div className="rounded-[2rem] bg-white p-8 text-slate-900 shadow-2xl">
-              <h3 className="text-2xl font-bold">{t("Free Consultation", "Tư vấn miễn phí")}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-600">
-                {t(
-                  "Tell us about your business and what you want your website to help you do.",
-                  "Hãy cho chúng tôi biết về business của bạn và website cần hỗ trợ điều gì."
-                )}
-              </p>
-              <form className="mt-6 space-y-4">
-                <input
-                  type="text"
-                  placeholder={t("Your name", "Tên của bạn")}
-                  className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500"
-                />
-                <input
-                  type="text"
-                  placeholder={t("Business type", "Loại hình kinh doanh")}
-                  className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500"
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500"
-                />
+            <div className="rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm md:p-8">
+              <h3 className="text-3xl font-semibold tracking-tight text-slate-950">
+                {t("Start Your Project", "Bắt đầu dự án")}
+              </h3>
+
+              <form className="mt-8 space-y-4">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <input
+                    type="text"
+                    placeholder={t("Your Name", "Tên của bạn")}
+                    className="h-12 rounded-xl border border-slate-200 px-4 text-sm outline-none transition focus:border-blue-500"
+                  />
+                  <select className="h-12 rounded-xl border border-slate-200 px-4 text-sm text-slate-500 outline-none transition focus:border-blue-500">
+                    <option>{t("Business Type", "Loại hình kinh doanh")}</option>
+                    <option>{t("Hair Salon", "Tiệm tóc")}</option>
+                    <option>{t("Nail Salon", "Tiệm nails")}</option>
+                    <option>{t("Retail", "Bán hàng")}</option>
+                    <option>{t("Logistics", "Logistics")}</option>
+                  </select>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    className="h-12 rounded-xl border border-slate-200 px-4 text-sm outline-none transition focus:border-blue-500"
+                  />
+                  <input
+                    type="text"
+                    placeholder={t("Phone Number", "Số điện thoại")}
+                    className="h-12 rounded-xl border border-slate-200 px-4 text-sm outline-none transition focus:border-blue-500"
+                  />
+                </div>
+
                 <textarea
-                  rows={5}
-                  placeholder={t("What do you need your website to help with?", "Bạn cần website hỗ trợ điều gì?")}
-                  className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500"
+                  rows={6}
+                  placeholder={t("Tell us about your project...", "Hãy cho chúng tôi biết về dự án của bạn...")}
+                  className="w-full rounded-xl border border-slate-200 px-4 py-4 text-sm outline-none transition focus:border-blue-500"
                 />
+
                 <button
                   type="button"
-                  className="w-full rounded-2xl bg-slate-900 px-5 py-3 font-semibold text-white transition hover:bg-slate-800"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:from-blue-700 hover:to-blue-600"
                 >
-                  {t("Send Inquiry", "Gửi yêu cầu")}
+                  {t("Send Message", "Gửi tin nhắn")}
+                  <ArrowRight className="h-4 w-4" />
                 </button>
               </form>
             </div>
           </div>
+        </section>
+      </main>
+
+      <footer className="bg-[#05122b] text-white">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[1.25fr_0.8fr_0.9fr_1fr] lg:px-8">
+          <div>
+            <img src={brand.logo} alt={brand.name} className="h-12 w-auto brightness-[1.2] saturate-0 invert" />
+            <p className="mt-5 max-w-xs text-sm leading-7 text-slate-300">
+              {t(
+                "Custom websites and AI solutions that help local businesses attract more customers and grow faster.",
+                "Website theo yêu cầu và giải pháp AI giúp business địa phương thu hút thêm khách hàng và phát triển nhanh hơn."
+              )}
+            </p>
+            <div className="mt-6 flex items-center gap-3">
+              {["f", "ig", "t", "yt"].map((item) => (
+                <div key={item} className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-xs font-semibold text-white">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold">{t("Quick Links", "Liên kết nhanh")}</h3>
+            <ul className="mt-5 space-y-3 text-sm text-slate-300">
+              {quickLinks.map((item) => (
+                <li key={item.en}>{lang === "en" ? item.en : item.vi}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold">{t("Services", "Dịch vụ")}</h3>
+            <ul className="mt-5 space-y-3 text-sm text-slate-300">
+              {footerServices.map((item) => (
+                <li key={item.en}>{lang === "en" ? item.en : item.vi}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold">{t("Newsletter", "Newsletter")}</h3>
+            <p className="mt-5 max-w-xs text-sm leading-7 text-slate-300">
+              {t("Get tips and updates to grow your business.", "Nhận tip và cập nhật để phát triển business của bạn.")}
+            </p>
+            <div className="mt-5 flex overflow-hidden rounded-xl border border-white/10 bg-white/10">
+              <input
+                type="email"
+                placeholder={t("Your email", "Email của bạn")}
+                className="w-full bg-transparent px-4 py-3 text-sm text-white placeholder:text-slate-400 outline-none"
+              />
+              <button className="flex h-auto items-center justify-center bg-blue-600 px-4 text-white transition hover:bg-blue-700">
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
         </div>
-      </section>
+
+        <div className="border-t border-white/10">
+          <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-6 text-sm text-slate-400 md:flex-row md:items-center md:justify-between lg:px-8">
+            <div>© 2024 SiteCraft Studio. {t("All rights reserved.", "Đã đăng ký bản quyền.")}</div>
+            <div className="flex items-center gap-6">
+              <a href="#privacy">{t("Privacy Policy", "Chính sách bảo mật")}</a>
+              <a href="#terms">{t("Terms Of Service", "Điều khoản dịch vụ")}</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
